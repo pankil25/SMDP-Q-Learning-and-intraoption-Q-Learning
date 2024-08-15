@@ -1,78 +1,63 @@
-# Grid World with SARSA and Q-Learning
+# SMDP-Q-Learning-and-intraoption-Q-Learning
+
+## Overview
+This repository contains implementations specifically Single-step Semi-Markov Decision Process (SMDP) Q-learning and intra-option Q-learning, applied to the Taxi-v3 environment from the OpenAI Gymnasium library. 
+
+## Requirements
+Make sure you have the following libraries installed:
+- `numpy`
+- `matplotlib`
+- `gymnasium`
+
+You can install them using pip:
+```bash
+pip install numpy matplotlib gymnasium
+```
 
 ## Environment Description
+The Taxi-v3 environment is a grid-based simulation where a taxi must navigate to pick up and drop off a passenger at designated locations. The environment consists of a 5x5 grid with 500 discrete states, where:
+- The taxi can be in any of the 25 positions.
+- The passenger can be at one of 5 locations (including in the taxi).
+- There are 4 possible drop-off destinations.
 
-### Grid World Overview
-- **Grid Dimensions**: 10x10
-- **States**:
-  - **Start State**: The initial state of the agent.
-  - **Goal States**: The agent aims to reach these (3 goal states).
-  - **Obstructed States**: Walls that block entry.
-  - **Bad States**: Entering these states incurs a penalty of -6.
-  - **Restart States**: Entering these states incurs a penalty of -100 and teleports the agent to the start state.
-  - **Normal States**: Default states with a penalty of -1.
-
-### Actions and Transitions
-- **Actions**: The agent can move ‘up’, ‘down’, ‘left’, or ‘right’.
-- **Stochasticity**:
-  - **p**: Probability that the agent moves in the intended direction.
-  - **b**: Parameter that defines probabilities of moving to adjacent states if the agent does not move as intended.
-- **Wind Effect**: 
-  - With a 40% chance, the wind can push the agent one cell to the right after transitioning.
+### State Representation
+- **Passenger Locations**: 
+  - 0: Red
+  - 1: Green
+  - 2: Yellow
+  - 3: Blue
+  - 4: In taxi
+- **Destinations**: 
+  - 0: Red
+  - 1: Green
+  - 2: Yellow
+  - 3: Blue
 
 ### Rewards
-- **Goal States**: +10
-- **Restart States**: -100
-- **Bad States**: -6
-- **Normal States**: -1
+- -1 per step unless a different reward is triggered.
+- +20 for successfully delivering a passenger.
+- -10 for illegal "pickup" and "drop-off" actions.
+
+The discount factor (γ) is set to 0.9.
+
+## Actions and Options
+- **Primitive Actions**:
+  - 0: Move South
+  - 1: Move North
+  - 2: Move East
+  - 3: Move West
+  - 4: Pick passenger up
+  - 5: Drop passenger off
+
+- **Options**: Options are available to move the taxi to each of the four designated locations when the taxi is not already there.
 
 ## Tasks
+1. Implement Single-step SMDP Q-learning for the taxi problem.
+2. Implement Intra-option Q-learning for the same environment.
+3. For both algorithms, plot reward curves and visualize the learned Q-values.
+4. Provide a written description of the learned policies and reasoning.
+5. Explore alternate sets of mutually exclusive options and compare the performance with the original options.
 
-### 1. Implement SARSA and Q-Learning
+## Code Run:
 
-Implement the following Temporal Difference Learning algorithms:
-- **SARSA**
-- **Q-Learning**
-
-### 2. Conduct Experiments
-
-#### Experimental Setup
-- **Start States**: (0, 4) and (3, 6)
-- **Grid World Variants**:
-  1. **Clear, Deterministic**: No wind, p = 1.0
-  2. **Clear, Stochastic**: No wind, p = 0.7
-  3. **Windy, Deterministic**: Wind active, p = 1.0
-
-#### Experiment Combinations
-- **12 Experiments Total**:
-  - 2 Start States
-  - 2 Algorithms
-  - 3 Grid World Variants
-
-### 3. Determine Optimal Hyperparameters
-
-For each experiment:
-- Tune the following hyperparameters:
-  - **τ** (softmax) or **ϵ** (ϵ-greedy)
-  - **Learning Rate (α)**
-  - **Discount Factor (γ)**
-- Choose the best action selection policy:
-  - **ϵ-greedy**
-  - **Softmax**
-
-### 4. Plot Results
-
-For each experiment, generate the following plots:
-1. **Reward Curves**: Plot the rewards and the number of steps to reach the goal in each episode.
-2. **State Visit Heatmap**: Show the number of visits to each state during training.
-3. **Q-Value Heatmap**: Display the Q-values after training and the optimal actions for the best policy.
-
-#### Plotting Details
-- **Training**: Train the agent for at least 5000 episodes.
-- **Averaging**: Average plots over 5 runs.
-- **Reward Curves**: Show the mean and standard deviation.
-
-## Code Running instructions:
-
-#### Run ipynb file from cell number 1 to last cell sequencially.
-
+### Run from cell number 1 to last cell sequencially
