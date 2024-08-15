@@ -1,4 +1,4 @@
-# SMDP-Q-Learning-and-intraoption-Q-Learning
+# SMDP-Q-Learning-and-intraoption-Q-Learning on Taxi-v3 environment
 
 ## Overview
 This repository contains implementations specifically Single-step Semi-Markov Decision Process (SMDP) Q-learning and intra-option Q-learning, applied to the Taxi-v3 environment from the OpenAI Gymnasium library. 
