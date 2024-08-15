@@ -58,6 +58,6 @@ The discount factor (γ) is set to 0.9.
 4. Provide a written description of the learned policies and reasoning.
 5. Explore alternate sets of mutually exclusive options and compare the performance with the original options.
 
-## Code Run:
+# Code Run:
 
-### Run from cell number 1 to last cell sequencially
+### Run ipynb file from cell number 1 to last cell sequencially
